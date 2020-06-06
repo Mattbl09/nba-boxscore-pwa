@@ -5,7 +5,8 @@ import './App.css';
 
 const App = () => {
     const [date, setDate] = useState('');
-    const [games, setGames] = useState([]);
+    const [games, setGames] = useState({});
+
 
     const search = async (e) => {
         if(e.key === 'Enter') {
@@ -19,13 +20,17 @@ const App = () => {
 
     return (
         <div className = "main-container">
-            <input
-                type="text" className="search" placeholder="Search Date..." value={date} onChange={(e) => setDate(e.target.value)} onKeyPress={search}/>
-                {games.data && ([games.data].map(game => (
+            <input type="text" className="search" placeholder="Search Date..." value={date} onChange={(e) => setDate(e.target.value)} onKeyPress={search}></input>
+                {games.data && (games.data.map(game => (
                 <div key={game.id} className="score"> 
                     <h2 className="score-name">
-                        <span>{game.date}</span>
-                        <sup>{game.home_team}</sup>                            
+                        <span>{game.home_team.full_name}</span>
+                        <sup>{game.home_team.abbreviation}</sup>
+                        <span>{game.home_team_score}</span>
+                        <br></br>
+                        <span>{game.visitor_team.full_name}</span>
+                        <sup>{game.visitor_team.abbreviation}</sup>
+                        <span>{game.visitor_team_score}</span>                            
                     </h2>
                 </div>
                 )))}
