@@ -29,7 +29,7 @@ html, body, #root {
     background: rgba(250, 250, 250, 0.85);
 }
 
-.city {
+.score {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,7 +58,7 @@ p {
     font-size: 0.5em;
 }
 
-.city-name {
+.score-name {
     font-size: 2em;
 }
 
