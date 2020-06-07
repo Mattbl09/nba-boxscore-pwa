@@ -3,11 +3,13 @@ import React, {useState} from 'react';
 import {fetchGames} from './api/fetchData';
 import './App.css';
 
+let today = new Date();
+console.log(today);
+
 const App = () => {
     const [date, setDate] = useState('');
     const [games, setGames] = useState({});
-
-
+    
     const search = async (e) => {
         if(e.key === 'Enter') {
             const data = await fetchGames(date)
