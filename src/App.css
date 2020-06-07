@@ -11,6 +11,7 @@ html, body, #root {
     background-size: cover;
     background-position: center;
     background-attachment: scroll;
+    overflow: auto;
 }
 
 .main-container {
@@ -36,18 +37,6 @@ p {
     letter-spacing: 0.05em;
 }
 
-.city-temp {
-    font-size: 5rem;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #1e2432;
-    text-align: center;
-}
-
-.city sup {
-    font-size: 0.5em;
-}
-
 .score {
     display: grid;
     align-items: center;
@@ -69,32 +58,9 @@ p {
     text-align: 'right';
 }
 
-.city-name sup {
-    padding: 0.2em 0.6em;
-    margin-left: 0.2em;
-    border-radius: 30px;
-    color: #fff;
-    background: #ff8c00;
-}
-
-.city-icon {
-    margin-top: 10px;
-    width: 100px;
-    height: 100px;
-}
-
-.info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 @media only screen and (max-width: 600px) {
     .search {
         padding: 20px 15%;
     }
 
-    .city {
-        padding: 40px 20%;
-    }
 }

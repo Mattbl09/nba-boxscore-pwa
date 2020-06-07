@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-
 import {fetchGames} from './api/fetchData';
 import './App.css';
 
-let today = new Date();
-console.log(today);
+
 
 const App = () => {
     const [date, setDate] = useState('');
     const [games, setGames] = useState({});
+
+
     
     const search = async (e) => {
         if(e.key === 'Enter') {
@@ -16,13 +16,13 @@ const App = () => {
 
             console.log(data);
             setGames(data);
-            setDate('');
         }
     }
 
     return (
         <div className = "main-container">
-            <input type="text" className="search" placeholder="Search Date..." value={date} onChange={(e) => setDate(e.target.value)} onKeyPress={search}></input>
+
+            <input type="date" className="search" placeholder="Search Date..." value={date} onChange={(e) => setDate(e.target.value)} onKeyPress={search}></input>
                 {games.data && (games.data.map(game => (
                 <div key={game.id} className="score">
                     <table>
