@@ -13,7 +13,7 @@ const App = () => {
     if (e.key === "Enter") {
       const data = await fetchGames(date);
 
-      console.log(data);
+      console.log(data, "<--- games data");
       setGames(data);
     }
   };
@@ -21,7 +21,8 @@ const App = () => {
   const boxscoreData = async (e) => {
     const data = await fetchBoxscore(gameID);
 
-    console.log(data);
+    console.log("gameid -->", gameID);
+    console.log(data, "<--- boxscore data");
     setGameID(data);
   };
 
@@ -103,6 +104,10 @@ const App = () => {
                 <th>PF</th>
               </tr>
               {gameID.data
+                .filter(
+                  (homeTeam) =>
+                    homeTeam.game.home_team_id === homeTeam.player.team_id
+                )
                 .sort(
                   ({ pts: previousPTS }, { pts: currentPTS }) =>
                     currentPTS - previousPTS
@@ -114,14 +119,20 @@ const App = () => {
                     </th>
                     <th>{gameID.min}</th>
                     <th>{gameID.pts}</th>
+                    <th>{gameID.fgm}</th>
+                    <th>{gameID.fg3m}</th>
+                    <th>{gameID.ftm}</th>
+                    <th>{gameID.oreb}</th>
+                    <th>{gameID.dreb}</th>
+                    <th>{gameID.reb}</th>
+                    <th>{gameID.ast}</th>
+                    <th>{gameID.stl}</th>
+                    <th>{gameID.blk}</th>
+                    <th>{gameID.turnover}</th>
+                    <th>{gameID.pf}</th>
                   </tr>
                 ))}
             </thead>
-            <tbody>
-              <tr>
-                <td>Test</td>
-              </tr>
-            </tbody>
           </table>
           <table className="boxscore-table">
             <thead className="boxscore-table-headers">
@@ -146,15 +157,38 @@ const App = () => {
                 <th>TO</th>
                 <th>PF</th>
               </tr>
-              {gameID.data.map((gameID) => (
-                <tr key={gameID.id}></tr>
-              ))}
+              {gameID.data
+                .filter(
+                  (visitorTeam) =>
+                    visitorTeam.game.visitor_team_id ===
+                    visitorTeam.player.team_id
+                )
+                .sort(
+                  ({ pts: previousPTS }, { pts: currentPTS }) =>
+                    currentPTS - previousPTS
+                )
+                .map((gameID) => (
+                  <tr key={gameID.id}>
+                    <th>
+                      {gameID.player.first_name} {gameID.player.last_name}
+                    </th>
+                    <th>{gameID.min}</th>
+                    <th>{gameID.pts}</th>
+                    <th>{gameID.fgm}</th>
+                    <th>{gameID.fg3m}</th>
+                    <th>{gameID.ftm}</th>
+                    <th>{gameID.oreb}</th>
+                    <th>{gameID.dreb}</th>
+                    <th>{gameID.reb}</th>
+                    <th>{gameID.ast}</th>
+                    <th>{gameID.stl}</th>
+                    <th>{gameID.blk}</th>
+                    <th>{gameID.turnover}</th>
+                    <th>{gameID.pf}</th>
+                  </tr>
+                ))}
             </thead>
-            <tbody>
-              <tr>
-                <td>Test</td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
           </table>
         </div>
       )}
