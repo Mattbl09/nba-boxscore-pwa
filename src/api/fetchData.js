@@ -9,13 +9,15 @@ export const fetchGames = async (date) => {
     },
   });
 
+  //console.log("date -->", date);
+
   return data;
 };
 
 export const fetchBoxscore = async (gameID) => {
   const { data } = await axios.get("https://www.balldontlie.io/api/v1/stats/", {
     params: {
-      game_ids: gameID,
+      game_ids: [gameID],
     },
   });
 

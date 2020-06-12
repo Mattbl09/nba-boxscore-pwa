@@ -3,9 +3,12 @@ import { fetchGames, fetchBoxscore } from "./api/fetchData";
 import "./App.css";
 
 const App = () => {
+  //states for scoreboard
   const [date, setDate] = useState("");
-  const [gameID, setGameID] = useState({});
   const [games, setGames] = useState({});
+  //states for boxscore
+  const [gameID, setGameID] = useState("");
+  const [boxscore, setBoxscore] = useState({});
 
   const [showScore, setShowscore] = useState(true);
 
@@ -13,24 +16,17 @@ const App = () => {
     if (e.key === "Enter") {
       const data = await fetchGames(date);
 
-      console.log(data, "<--- games data");
+      //console.log(data, "<--- games data");
       setGames(data);
     }
   };
 
-  const boxscoreData = async (e) => {
+  const boxscoreData = async (gameID) => {
     const data = await fetchBoxscore(gameID);
 
-    console.log("gameid -->", gameID);
     console.log(data, "<--- boxscore data");
-    setGameID(data);
+    setBoxscore(data);
   };
-
-  /*
-  const sorted = gameID.data.sort((a, b) => {
-    return b.pts - a.pts;
-  });
-  */
 
   return (
     <div className="main-container">
@@ -58,7 +54,9 @@ const App = () => {
                   <td rowSpan="2">
                     <button
                       className="button"
+                      value={game.id}
                       onClick={(e) => {
+                        setGameID(e.target.value);
                         setShowscore(!showScore);
                         boxscoreData(game.id);
                       }}
@@ -78,7 +76,7 @@ const App = () => {
             </table>
           </div>
         ))}
-      {!showScore && gameID.data && (
+      {!showScore && boxscore.data && (
         <div>
           <table className="boxscore-table">
             <thead className="boxscore-table-headers">
@@ -87,7 +85,7 @@ const App = () => {
               </tr>
             </thead>
             <thead>
-              <tr>
+              <tr className="boxscore-stat-headers">
                 <th>Player Name</th>
                 <th>MIN</th>
                 <th>PTS</th>
@@ -103,7 +101,7 @@ const App = () => {
                 <th>TO</th>
                 <th>PF</th>
               </tr>
-              {gameID.data
+              {boxscore.data
                 .filter(
                   (homeTeam) =>
                     homeTeam.game.home_team_id === homeTeam.player.team_id
@@ -112,24 +110,24 @@ const App = () => {
                   ({ pts: previousPTS }, { pts: currentPTS }) =>
                     currentPTS - previousPTS
                 )
-                .map((gameID) => (
-                  <tr key={gameID.id}>
+                .map((boxscore) => (
+                  <tr key={boxscore.id}>
                     <th>
-                      {gameID.player.first_name} {gameID.player.last_name}
+                      {boxscore.player.first_name} {boxscore.player.last_name}
                     </th>
-                    <th>{gameID.min}</th>
-                    <th>{gameID.pts}</th>
-                    <th>{gameID.fgm}</th>
-                    <th>{gameID.fg3m}</th>
-                    <th>{gameID.ftm}</th>
-                    <th>{gameID.oreb}</th>
-                    <th>{gameID.dreb}</th>
-                    <th>{gameID.reb}</th>
-                    <th>{gameID.ast}</th>
-                    <th>{gameID.stl}</th>
-                    <th>{gameID.blk}</th>
-                    <th>{gameID.turnover}</th>
-                    <th>{gameID.pf}</th>
+                    <th>{boxscore.min}</th>
+                    <th>{boxscore.pts}</th>
+                    <th>{boxscore.fgm}</th>
+                    <th>{boxscore.fg3m}</th>
+                    <th>{boxscore.ftm}</th>
+                    <th>{boxscore.oreb}</th>
+                    <th>{boxscore.dreb}</th>
+                    <th>{boxscore.reb}</th>
+                    <th>{boxscore.ast}</th>
+                    <th>{boxscore.stl}</th>
+                    <th>{boxscore.blk}</th>
+                    <th>{boxscore.turnover}</th>
+                    <th>{boxscore.pf}</th>
                   </tr>
                 ))}
             </thead>
@@ -157,7 +155,7 @@ const App = () => {
                 <th>TO</th>
                 <th>PF</th>
               </tr>
-              {gameID.data
+              {boxscore.data
                 .filter(
                   (visitorTeam) =>
                     visitorTeam.game.visitor_team_id ===
@@ -167,24 +165,24 @@ const App = () => {
                   ({ pts: previousPTS }, { pts: currentPTS }) =>
                     currentPTS - previousPTS
                 )
-                .map((gameID) => (
-                  <tr key={gameID.id}>
+                .map((boxscore) => (
+                  <tr key={boxscore.id}>
                     <th>
-                      {gameID.player.first_name} {gameID.player.last_name}
+                      {boxscore.player.first_name} {boxscore.player.last_name}
                     </th>
-                    <th>{gameID.min}</th>
-                    <th>{gameID.pts}</th>
-                    <th>{gameID.fgm}</th>
-                    <th>{gameID.fg3m}</th>
-                    <th>{gameID.ftm}</th>
-                    <th>{gameID.oreb}</th>
-                    <th>{gameID.dreb}</th>
-                    <th>{gameID.reb}</th>
-                    <th>{gameID.ast}</th>
-                    <th>{gameID.stl}</th>
-                    <th>{gameID.blk}</th>
-                    <th>{gameID.turnover}</th>
-                    <th>{gameID.pf}</th>
+                    <th>{boxscore.min}</th>
+                    <th>{boxscore.pts}</th>
+                    <th>{boxscore.fgm}</th>
+                    <th>{boxscore.fg3m}</th>
+                    <th>{boxscore.ftm}</th>
+                    <th>{boxscore.oreb}</th>
+                    <th>{boxscore.dreb}</th>
+                    <th>{boxscore.reb}</th>
+                    <th>{boxscore.ast}</th>
+                    <th>{boxscore.stl}</th>
+                    <th>{boxscore.blk}</th>
+                    <th>{boxscore.turnover}</th>
+                    <th>{boxscore.pf}</th>
                   </tr>
                 ))}
             </thead>
