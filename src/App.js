@@ -12,19 +12,17 @@ const App = () => {
 
   const [showScore, setShowscore] = useState(true);
 
-  const searchDate = async (e) => {
-    if (e.key === "Enter") {
-      const data = await fetchGames(date);
+  const searchDate = async (date) => {
+    const data = await fetchGames(date);
 
-      //console.log(data, "<--- games data");
-      setGames(data);
-    }
+    //console.log(date, "<--- games date");
+    setGames(data);
   };
 
   const boxscoreData = async (gameID) => {
     const data = await fetchBoxscore(gameID);
 
-    console.log(data, "<--- boxscore data");
+    //console.log(data, "<--- boxscore data");
     setBoxscore(data);
   };
 
@@ -36,8 +34,10 @@ const App = () => {
           className="search"
           placeholder="Search Date..."
           value={date}
-          onChange={(e) => setDate(e.target.value)}
-          onKeyPress={searchDate}
+          onChange={(e) => {
+            setDate(e.target.value);
+            searchDate(e.target.value);
+          }}
         ></input>
       )}
       {games.data &&
@@ -53,8 +53,8 @@ const App = () => {
                   <td>{game.home_team_score}</td>
                   <td rowSpan="2">
                     <button
-                      className="button"
-                      value={game.id}
+                      className="boxscore-button"
+                      value={gameID}
                       onClick={(e) => {
                         setGameID(e.target.value);
                         setShowscore(!showScore);
@@ -78,6 +78,14 @@ const App = () => {
         ))}
       {!showScore && boxscore.data && (
         <div>
+          <button
+            className="scoreboard-button"
+            onClick={(e) => {
+              setShowscore(!showScore);
+            }}
+          >
+            Back to Scores
+          </button>
           <table className="boxscore-table">
             <thead className="boxscore-table-headers">
               <tr>
@@ -115,19 +123,20 @@ const App = () => {
                     <th>
                       {boxscore.player.first_name} {boxscore.player.last_name}
                     </th>
+                    <th>{boxscore.team.abbreviation}</th>
                     <th>{boxscore.min}</th>
-                    <th>{boxscore.pts}</th>
-                    <th>{boxscore.fgm}</th>
-                    <th>{boxscore.fg3m}</th>
-                    <th>{boxscore.ftm}</th>
-                    <th>{boxscore.oreb}</th>
-                    <th>{boxscore.dreb}</th>
-                    <th>{boxscore.reb}</th>
-                    <th>{boxscore.ast}</th>
-                    <th>{boxscore.stl}</th>
-                    <th>{boxscore.blk}</th>
-                    <th>{boxscore.turnover}</th>
-                    <th>{boxscore.pf}</th>
+                    <th className="boxscore-stats">{boxscore.pts}</th>
+                    <th className="boxscore-stats">{boxscore.fgm}</th>
+                    <th className="boxscore-stats">{boxscore.fg3m}</th>
+                    <th className="boxscore-stats">{boxscore.ftm}</th>
+                    <th className="boxscore-stats">{boxscore.oreb}</th>
+                    <th className="boxscore-stats">{boxscore.dreb}</th>
+                    <th className="boxscore-stats">{boxscore.reb}</th>
+                    <th className="boxscore-stats">{boxscore.ast}</th>
+                    <th className="boxscore-stats">{boxscore.stl}</th>
+                    <th className="boxscore-stats">{boxscore.blk}</th>
+                    <th className="boxscore-stats">{boxscore.turnover}</th>
+                    <th className="boxscore-stats">{boxscore.pf}</th>
                   </tr>
                 ))}
             </thead>
@@ -170,19 +179,20 @@ const App = () => {
                     <th>
                       {boxscore.player.first_name} {boxscore.player.last_name}
                     </th>
-                    <th>{boxscore.min}</th>
-                    <th>{boxscore.pts}</th>
-                    <th>{boxscore.fgm}</th>
-                    <th>{boxscore.fg3m}</th>
-                    <th>{boxscore.ftm}</th>
-                    <th>{boxscore.oreb}</th>
-                    <th>{boxscore.dreb}</th>
-                    <th>{boxscore.reb}</th>
-                    <th>{boxscore.ast}</th>
-                    <th>{boxscore.stl}</th>
-                    <th>{boxscore.blk}</th>
-                    <th>{boxscore.turnover}</th>
-                    <th>{boxscore.pf}</th>
+                    <th>{boxscore.team.abbreviation}</th>
+                    <th className="boxscore-stats">{boxscore.min}</th>
+                    <th className="boxscore-stats">{boxscore.pts}</th>
+                    <th className="boxscore-stats">{boxscore.fgm}</th>
+                    <th className="boxscore-stats">{boxscore.fg3m}</th>
+                    <th className="boxscore-stats">{boxscore.ftm}</th>
+                    <th className="boxscore-stats">{boxscore.oreb}</th>
+                    <th className="boxscore-stats">{boxscore.dreb}</th>
+                    <th className="boxscore-stats">{boxscore.reb}</th>
+                    <th className="boxscore-stats">{boxscore.ast}</th>
+                    <th className="boxscore-stats">{boxscore.stl}</th>
+                    <th className="boxscore-stats">{boxscore.blk}</th>
+                    <th className="boxscore-stats">{boxscore.turnover}</th>
+                    <th className="boxscore-stats">{boxscore.pf}</th>
                   </tr>
                 ))}
             </thead>

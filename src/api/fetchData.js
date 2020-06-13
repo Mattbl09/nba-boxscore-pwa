@@ -21,7 +21,7 @@ export const fetchBoxscore = async (gameID) => {
     },
   });
 
-  console.log(gameID, "<--- gameID");
+  //console.log(gameID, "<--- gameID");
 
   return data;
 };
