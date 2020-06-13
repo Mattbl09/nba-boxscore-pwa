@@ -50,7 +50,7 @@ const App = () => {
                   <td style={{ textAlign: "right" }}>
                     {game.home_team.full_name}:
                   </td>
-                  <td>{game.home_team_score}</td>
+                  <td style={{ textAlign: "right" }}>{game.home_team_score}</td>
                   <td rowSpan="2">
                     <button
                       className="boxscore-button"
@@ -70,7 +70,9 @@ const App = () => {
                   <td style={{ textAlign: "right" }}>
                     {game.visitor_team.full_name}:
                   </td>
-                  <td>{game.visitor_team_score}</td>
+                  <td style={{ textAlign: "right" }}>
+                    {game.visitor_team_score}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -95,6 +97,7 @@ const App = () => {
             <thead>
               <tr className="boxscore-stat-headers">
                 <th>Player Name</th>
+                <th>Team</th>
                 <th>MIN</th>
                 <th>PTS</th>
                 <th>FG</th>
@@ -150,6 +153,7 @@ const App = () => {
             <thead>
               <tr>
                 <th>Player Name</th>
+                <th>Team</th>
                 <th>MIN</th>
                 <th>PTS</th>
                 <th>FG</th>
