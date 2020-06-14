@@ -100,17 +100,20 @@ p {
 }
 
 .boxscore-stats {
+  font-size: 0.9vw;
   text-align: center;
   padding-right: 10px;
 }
 
 .boxscore-table-headers {
   border-bottom: 1px solid rgba(15, 15, 15, 0.404);
+  font-size: 0.9vw;
 }
 
 .boxscore-stat-headers {
   text-align: center;
   padding-right: 10px;
+  font-size: 0.9vw;
 }
 
 @media only screen and (max-width: 760px),
