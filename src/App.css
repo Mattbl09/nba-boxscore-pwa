@@ -10,11 +10,11 @@ body,
 
 .main-container {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.418)),
-    url("/scores app background.png");
+    url("/images/scores app background.png");
   background-size: cover;
   background-position: center;
   background-attachment: scroll;
-  overflow: auto;
+  overflow: scroll;
 }
 
 .main-container {
