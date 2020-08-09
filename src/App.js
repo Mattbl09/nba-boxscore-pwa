@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchGames, fetchBoxscore } from "./api/fetchData";
 import "./App.css";
 
 const App = () => {
+
+  let fullDate = new Date();
+  let shortDate = fullDate.toISOString().split('T')[0]
+  console.log(shortDate);
+
+  useEffect(() => {
+    searchDate(shortDate);
+  }, []);
+
   //states for scoreboard
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(shortDate);
   const [games, setGames] = useState({});
   //states for boxscore
   const [gameID, setGameID] = useState("");
@@ -14,8 +23,7 @@ const App = () => {
 
   const searchDate = async (date) => {
     const data = await fetchGames(date);
-
-    //console.log(date, "<--- games date");
+    //console.log(data)
     setGames(data);
   };
 
@@ -36,7 +44,6 @@ const App = () => {
         <input
           type="date"
           className="search"
-          placeholder="Search Date..."
           value={date}
           onChange={(e) => {
             setDate(e.target.value);
@@ -67,8 +74,10 @@ const App = () => {
                     >
                       boxscore
                     </button>
+                    <td>
+                      {game.status}
+                    </td>
                   </td>
-                  <td></td>
                 </tr>
                 <tr className="score-name">
                   <td style={{ textAlign: "right" }}>
