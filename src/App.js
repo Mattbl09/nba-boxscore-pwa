@@ -5,7 +5,7 @@ import "./App.css";
 const App = () => {
 
   let fullDate = new Date();
-  let shortDate = fullDate.toISOString().split('T')[0]
+  const shortDate = fullDate.toISOString().split('T')[0]
   console.log(shortDate);
 
   useEffect(() => {
