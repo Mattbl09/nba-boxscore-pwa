@@ -10,7 +10,7 @@ const App = () => {
 
   useEffect(() => {
     searchDate(shortDate);
-  }, []);
+  }, [shortDate]);
 
   //states for scoreboard
   const [date, setDate] = useState(shortDate);
